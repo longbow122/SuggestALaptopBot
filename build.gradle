@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    // Shadow plugin, used to shade any dependencies needed.
+    id "com.github.johnrengelman.shadow" version "8.1.1"
+}
+
+group = 'me.longbow122'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    // Google GSON, being used to read and write to JSON files for configuration and other needed data.
+    implementation 'com.google.code.gson:gson:2.10'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+shadowJar {
+    archiveBaseName.set("SuggestALaptopBot")
+    archiveVersion.set('1.0.0')
+    archiveClassifier.set('')
+}
+
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'me.longbow122.SuggestALaptopBot.Main'
+        )
+    }
+}
