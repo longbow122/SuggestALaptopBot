@@ -19,13 +19,25 @@ might be needed.
 
 ## Contributions
 ### Pull Requests
-Contributions through a fork and a pull request are welcome, although, for my (longbow122) sake, I ask that you strenously
+Contributions through a fork and a pull request are welcome, although, for my (longbow122) sake, I ask that you strenuously
 comment your code and explain why you've made such a change so that I can learn from your work, and why it is seen as 
 an improvement over what is currently implemented.
 
 To the best of my knowledge, I do not currently adhere to any strict code standard, but that will likely change. I intend
 on enforcing external contributions to also lie within those standards and styles should a standard be adopted by this 
 project.
+
+It is worth noting that branches will follow a specific naming convention. Branch names are to be all lowercase, with hyphens
+separating words where applicable. 
+
+Depending on whether the branch is a feature or a fix, that will also be prefixed to the branch name accordingly, with a forward slash.
+See below for some examples:
+```text
+feature/implement-configuration
+fix/fix-bug-in-command-handler
+feature/implement-new-command
+```
+When making a pull request, I ask that your branches be named so, where applicable.
 
 ### Issues
 If you would like to suggest a feature, or would like to leave a more open-ended suggestion/feedback regarding my code 
