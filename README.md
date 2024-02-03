@@ -1,9 +1,10 @@
 # SuggestALaptop Bot - A Discord Bot
 This discord bot was written for [SuggestALaptop](https://discord.gg/r9R7T4Qg5A), and is used to aid those looking for a recommendation
-in recieving a laptop recommendation. This bot was written in Java using [JDA](https://github.com/discord-jda/JDA) to interact with Discord's API.
+in recieving a laptop recommendation. This bot also contains several other utility features for the SuggestALaptop discord server.
+This bot was written in Java using [JDA](https://github.com/discord-jda/JDA) to interact with Discord's API.
 
 ## Documentation
-This project has not yet been documenting, but once this bot has been developed to the point where it can be considered "complete",
+This project has not yet been documented, but once this bot has been developed to the point where it can be considered "complete",
 detailed documentation and video documentation regarding the use and configuration of the bot will be released.
 
 ## Maintenance

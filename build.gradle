@@ -17,6 +17,9 @@ dependencies {
 
     // Google GSON, being used to read and write to JSON files for configuration and other needed data.
     implementation 'com.google.code.gson:gson:2.10'
+
+    // JDA. Used to interact with Discord's API.
+    implementation("net.dv8tion:JDA:5.0.0-beta.20")
 }
 
 test {
