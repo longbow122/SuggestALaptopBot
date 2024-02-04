@@ -13,14 +13,14 @@ import java.util.HashMap;
  * This class is used to handle the files used to handle slash command copypastas.
  * Any file handling logic specific to the "commands.json" file is to be stored here.
  */
-public class CopypastaCommandHandler extends ConfigHandler {
+public class CopypastaConfigHandler extends ConfigHandler {
 
   /**
-   * A constructor for the CopypastaCommandHandler class.
+   * A constructor for the CopypastaConfigHandler class.
    * This constructor is empty, as we know where the data for slash copypastas is stored.
    * We can hardcode the file name, and have this handle everything to do with commands.
    */
-  public CopypastaCommandHandler() {
+  public CopypastaConfigHandler() {
     super("commands.json");
   }
 

@@ -1,6 +1,6 @@
 package me.longbow122.SuggestALaptopBot.events;
 
-import me.longbow122.SuggestALaptopBot.configuration.CopypastaCommandHandler;
+import me.longbow122.SuggestALaptopBot.configuration.CopypastaConfigHandler;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -15,7 +15,7 @@ public class SlashCopypasta extends ListenerAdapter {
     This event handler will handle the copypasta commands themselves, defined within the commands file.
      */
     if(event.getGuild() == null) return;
-    CopypastaCommandHandler commands = new CopypastaCommandHandler();
+    CopypastaConfigHandler commands = new CopypastaConfigHandler();
     HashMap<String, String> commandInfo = commands.returnAllCommandRegisterInformation();
     // If the command isn't in the file, give up.
     if (!(commandInfo.containsKey(event.getName()))) return;

@@ -17,6 +17,12 @@ public class ConfigHandler {
   protected File file;
 
   // TODO BREAK UP CONFIG HANDLERS INTO INDIVIDUAL COMMAND AND MESSAGES FILES. HAVE THIS BE THE GENERIC, AND LET THE COMMANDS AND MESSAGES FILES HAVE THEIR OWN HANDLERS.
+  /*
+  With the current way that this class, and others related to it are structured, something needs to change.
+  This doesn't feel as clean as things could be and as such, I want to be able to change it so it can be considered cleaner.
+  Will likely look into a better way of designing this class later, but for now, at least it works.
+   */
+
   public ConfigHandler(String fileName) {
     this.file = getFile(fileName);
   }
@@ -30,7 +36,6 @@ public class ConfigHandler {
    */
   private JsonElement getJsonElement(String key) {
     JsonElement tree;
-    System.out.println(file.getName());
     try {
       // Make this line universal to all three config files by using the name of their file as the main tree for values.
       tree = JsonParser.parseReader(new FileReader(file)).getAsJsonObject().get(file.getName().replace(".json", ""));
@@ -40,7 +45,6 @@ public class ConfigHandler {
     }
     if (tree == null || !tree.isJsonArray()) return null;
     JsonArray configArray = tree.getAsJsonArray();
-    System.out.println(configArray);
     for (JsonElement x : configArray) {
       if (!(x.isJsonObject())) continue;
       JsonObject potentialString = x.getAsJsonObject();
@@ -61,7 +65,7 @@ public class ConfigHandler {
     JsonElement element = getJsonElement(key);
     if (element == null) return -1; // Ideally longs will be used for role IDs and as such, -1 can be reserved for null.
     System.out.println(element.getAsLong());
-    return element.getAsLong();
+    return Long.parseLong(element.toString().replace("\"", ""));
   }
 
   /**
