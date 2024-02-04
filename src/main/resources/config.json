@@ -1,7 +1,11 @@
 {
-  "configuration": [
+  "config": [
     {
-      "token": ""
+      "token": "yourBotTokenHere",
+      "logChannel": "",
+      "copypastaRole": "",
+      "adminRole": "",
+      "opUserID": ""
     }
   ]
 }
