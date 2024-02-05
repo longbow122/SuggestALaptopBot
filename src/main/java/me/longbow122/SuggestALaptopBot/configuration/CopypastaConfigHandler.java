@@ -96,4 +96,23 @@ public class CopypastaConfigHandler extends ConfigHandler {
     }
     return null;
   }
+  /* TODO
+  Adding a command like this, and performing other forms of edit is hacky, and not needed.
+  We're going to be using H2 as a database framework, letting us make use of this to store commands information.
+
+  We're also realistically not going to have more than about 1000 commands, and in this case, we can easily linearly search through that.
+
+  In doing this, we've now lost the ability to configure commands information through the file easily, but it's not a big issue.
+  Making life easier in terms of editing this information will likely work out better in the long run.
+   */
+
+//  public boolean addCopypastaCommand(String name, String message, String description) {
+//    JsonArray currentCommands = getCommands();
+//    JsonObject obj = new JsonObject();
+//    obj.addProperty("name", name);
+//    obj.addProperty("description", description);
+//    obj.addProperty("message", message);
+//    currentCommands.add(obj);
+//
+//  }
 }
