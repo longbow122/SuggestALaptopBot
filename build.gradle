@@ -24,7 +24,7 @@ dependencies {
     // H2 Database Driver. To be used in working with an embedded local database to be used by the bot to store
     // both deals and commands information.
     // https://mvnrepository.com/artifact/com.h2database/h2
-    testImplementation group: 'com.h2database', name: 'h2', version: '2.2.224'
+    implementation group: 'com.h2database', name: 'h2', version: '2.2.224'
 
 }
 

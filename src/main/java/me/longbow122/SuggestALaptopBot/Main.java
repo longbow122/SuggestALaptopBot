@@ -3,8 +3,10 @@ package me.longbow122.SuggestALaptopBot;
 
 import me.longbow122.SuggestALaptopBot.configuration.ConfigHandler;
 import me.longbow122.SuggestALaptopBot.configuration.CopypastaConfigHandler;
+import me.longbow122.SuggestALaptopBot.db.CopypastaDB;
 import me.longbow122.SuggestALaptopBot.events.SlashCopypasta;
 import me.longbow122.SuggestALaptopBot.events.SlashCopypastaAdmin;
+import me.longbow122.SuggestALaptopBot.objects.CopypastaCommand;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
@@ -28,10 +30,12 @@ public class Main {
 
 
 
-  public static void main(String[] args) throws InterruptedException {
+  public static void main(String[] args) {
+    // Ensure that the database is connected
+    new CopypastaDB().createTable();
+
     System.out.println("Starting bot...");
     String token = configFile.getString("token").replace("\"", "");
-
     JDA jda = JDABuilder.createDefault(token).enableIntents(GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_MESSAGES)
       .addEventListeners(new SlashCopypasta())
       .addEventListeners(new SlashCopypastaAdmin())

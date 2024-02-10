@@ -14,6 +14,7 @@ public class SlashCopypastaAdmin extends ListenerAdapter {
     //TODO THIS FEELS VERY HARDCODED AND NOT THAT INTUITIVE. IS THERE A BETTER WAY OF DOING THIS?
     switch (event.getFullCommandName()) {
       case "copypasta add": {
+
         System.out.println("Command is to be added.");
 
       }
