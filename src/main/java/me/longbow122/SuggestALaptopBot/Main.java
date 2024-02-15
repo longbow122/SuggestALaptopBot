@@ -2,11 +2,8 @@ package me.longbow122.SuggestALaptopBot;
 
 
 import me.longbow122.SuggestALaptopBot.configuration.ConfigHandler;
-import me.longbow122.SuggestALaptopBot.configuration.CopypastaConfigHandler;
 import me.longbow122.SuggestALaptopBot.db.CopypastaDB;
-import me.longbow122.SuggestALaptopBot.events.SlashCopypasta;
-import me.longbow122.SuggestALaptopBot.events.SlashCopypastaAdmin;
-import me.longbow122.SuggestALaptopBot.objects.CopypastaCommand;
+import me.longbow122.SuggestALaptopBot.events.SlashCopypastaHandler;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
@@ -30,17 +27,18 @@ public class Main {
 
 
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws InterruptedException {
     // Ensure that the database is connected
     new CopypastaDB().createTable();
 
     System.out.println("Starting bot...");
     String token = configFile.getString("token").replace("\"", "");
     JDA jda = JDABuilder.createDefault(token).enableIntents(GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_MESSAGES)
-      .addEventListeners(new SlashCopypasta())
-      .addEventListeners(new SlashCopypastaAdmin())
+      .addEventListeners(new SlashCopypastaHandler())
       .build();
-    HashMap<String, String> commandInfo = new CopypastaConfigHandler().returnAllCommandRegisterInformation();
+    // TODO THE OLD HASHMAP HAS BEEN PHASED OUT IN FAVOUR OF READING FROM THE DB INSTEAD. REMOVE RELEVANT CODE ONCE DB IS WORKING.
+    //HashMap<String, String> commandInfo = new CopypastaConfigHandler().returnAllCommandRegisterInformation();
+    HashMap<String, String> commandInfo = new CopypastaDB().getAllCopypastaInformation();
     CommandListUpdateAction commands = jda.updateCommands();
     // Add all copypastas.
     for (String commandName : commandInfo.keySet()) {
@@ -52,17 +50,16 @@ public class Main {
 
       .addSubcommands(new SubcommandData("add", "Add a copypasta to the list of slash commands")
         .addOption(OptionType.STRING, "name", "The unique name of the copypasta command to be added. REQUIRED.", true)
-        .addOption(OptionType.STRING, "message", "The actual message behind the copypasta command. REQUIRED.", true)
-        .addOption(OptionType.STRING, "description", "The description of the copypasta command to be added. OPTIONAL.", false))
+        .addOption(OptionType.STRING, "description", "The description of the copypasta command to be added. REQUIRED.", true)
+        .addOption(OptionType.STRING, "message", "The actual message behind the copypasta command. REQUIRED.", true))
 
       .addSubcommands(new SubcommandData("remove", "Remove a copypasta from the list of slash commands")
         .addOptions(new OptionData(OptionType.STRING, "name", "The name of the copypasta command to be removed. REQUIRED.", true, true)))
       //TODO NEED TO IMPLEMENT AUTOCOMPLETE LOGIC USING THE COMMAND LIST AND THE AUTOCOMPLETE EVENT
-
-      .addSubcommands(new SubcommandData("list", "List the command copypastas and their messages"))
       .setGuildOnly(true));
 
     commands.queue();
+    jda.awaitReady();
     System.out.println(configFile.getLong("logChannel"));
     logChannel = jda.getTextChannelById(configFile.getLong("logChannel"));
     log("Bot started.");

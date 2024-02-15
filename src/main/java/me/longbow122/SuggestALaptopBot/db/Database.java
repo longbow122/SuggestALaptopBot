@@ -26,8 +26,7 @@ public abstract class Database {
       return;
     }
     try {
-      //TODO MAKE SURE THAT THIS IS TESTED
-      conn = DriverManager.getConnection("jdbc:h2:./data.db");
+      conn = DriverManager.getConnection("jdbc:h2:./data");
     } catch (SQLException e) {
       e.printStackTrace();
       return;

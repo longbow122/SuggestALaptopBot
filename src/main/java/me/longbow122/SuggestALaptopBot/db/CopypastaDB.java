@@ -129,7 +129,6 @@ public class CopypastaDB extends Database {
    * @return {@link HashMap} representing every name and description for slash copypasta commands that could be used.
    */
   public HashMap<String, String> getAllCopypastaInformation() {
-    // TODO MIGHT BE WORTH TESTING THIS, UNSURE IF THIS WILL TURN OUT THE WAY WE WANT IT TO
     String s = "SELECT NAME, DESCRIPTION FROM Copypasta";
     Connection c = connect();
     try {
@@ -150,46 +149,25 @@ public class CopypastaDB extends Database {
   }
 
   /**
-   * This method is an easy abstraction behind the logic of retrieving the description of the command. Simple enough.
-   * @param commandName {@link String} representing the name of the command, for which a description should exist.
-   * @return {@link String} representing the description of the command, provided it exists. Null otherwise.
-   */
-  public String getDescription(String commandName) {
-    String s = "SELECT * FROM Copypasta WHERE name=";
-    Connection c = connect();
-    try {
-      PreparedStatement statement = c.prepareStatement(s);
-      statement.setString(1, commandName);
-      ResultSet rs = statement.executeQuery();
-      String description = rs.getString(2);
-      if (description == null) {
-        return null;
-      }
-      statement.close();
-      disconnect();
-      return description;
-    } catch (SQLException e) {
-      e.printStackTrace();
-      return null;
-    }
-  }
-
-  /**
    * This method is an easy abstraction behind the logic of retrieving the message to be sent by a command. Simple enough.
    * @param commandName {@link String} representing the name of the command, for which a message should exist.
    * @return {@link String} representing the description of the command, provided it exists. Null otherwise.
    */
   public String getMessage(String commandName) {
-    String s = "SELECT * FROM Copypasta WHERE name=";
+    String s = "SELECT MESSAGE FROM Copypasta WHERE name=?";
     Connection c = connect();
     try {
       PreparedStatement statement = c.prepareStatement(s);
       statement.setString(1, commandName);
       ResultSet rs = statement.executeQuery();
-      String message = rs.getString(3);
+      String message;
+      if (rs.next()) {
+        message = rs.getString(1);
+      } else { message = null; }
       if (message == null) {
         return null;
       }
+      rs.close();
       statement.close();
       disconnect();
       return message;
