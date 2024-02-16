@@ -56,6 +56,14 @@ public class Main {
       .addSubcommands(new SubcommandData("remove", "Remove a copypasta from the list of slash commands")
         .addOptions(new OptionData(OptionType.STRING, "name", "The name of the copypasta command to be removed. REQUIRED.", true, true)))
       //TODO NEED TO IMPLEMENT AUTOCOMPLETE LOGIC USING THE COMMAND LIST AND THE AUTOCOMPLETE EVENT
+
+        .addSubcommands(new SubcommandData("update", "Change the name, description or message of an existing copypasta")
+          .addOption(OptionType.STRING, "name", "The current name of the copypasta command to be updated. REQUIRED.", true)
+          .addOption(OptionType.STRING, "field", "The field to update. (Name, Description, Message). REQUIRED.", true)
+          .addOption(OptionType.STRING, "value", "The new value of the field. REQUIRED.", true))
+      //TODO NEED TO IMPLEMENT AUTOCOMPLETE LOGIC USING THE COMMAND LIST AND THE AUTOCOMPLETE EVENT FOR THE NAMES OF THE COMMANDS FOR THE FIRST OPTION
+      //TODO NEED TO IMPLEMENT AUTOCOMPLETE LOGIC USING THE THREE VALUES (NAME, DESCRIPTION, MESSAGE) FOR THE SECOND OPTION. SHOULD BE MUCH EASIER TO IMPLEMENT THAN THE OTHERS.
+
       .setGuildOnly(true));
 
     commands.queue();
