@@ -20,6 +20,12 @@ dependencies {
 
     // JDA. Used to interact with Discord's API.
     implementation("net.dv8tion:JDA:5.0.0-beta.20")
+
+    // H2 Database Driver. To be used in working with an embedded local database to be used by the bot to store
+    // both deals and commands information.
+    // https://mvnrepository.com/artifact/com.h2database/h2
+    implementation group: 'com.h2database', name: 'h2', version: '2.2.224'
+
 }
 
 test {
