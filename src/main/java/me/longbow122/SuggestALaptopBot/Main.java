@@ -3,7 +3,9 @@ package me.longbow122.SuggestALaptopBot;
 
 import me.longbow122.SuggestALaptopBot.configuration.ConfigHandler;
 import me.longbow122.SuggestALaptopBot.db.CopypastaDB;
-import me.longbow122.SuggestALaptopBot.events.SlashCopypastaHandler;
+import me.longbow122.SuggestALaptopBot.events.CopypastaAutocompleteListener;
+import me.longbow122.SuggestALaptopBot.events.CopypastaModalListener;
+import me.longbow122.SuggestALaptopBot.events.SlashCopypastaCommandListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
@@ -29,15 +31,16 @@ public class Main {
 
   public static void main(String[] args) throws InterruptedException {
     // Ensure that the database is connected
+    //TODO FIND A WAY TO GO THROUGH EVERY DB CLASS AND NEATLY find a way to call these methods
     new CopypastaDB().createTable();
 
     System.out.println("Starting bot...");
     String token = configFile.getString("token").replace("\"", "");
     JDA jda = JDABuilder.createDefault(token).enableIntents(GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_MESSAGES)
-      .addEventListeners(new SlashCopypastaHandler())
-      .build();
-    // TODO THE OLD HASHMAP HAS BEEN PHASED OUT IN FAVOUR OF READING FROM THE DB INSTEAD. REMOVE RELEVANT CODE ONCE DB IS WORKING.
-    //HashMap<String, String> commandInfo = new CopypastaConfigHandler().returnAllCommandRegisterInformation();
+        .addEventListeners(new SlashCopypastaCommandListener())
+        .addEventListeners(new CopypastaModalListener())
+        .addEventListeners(new CopypastaAutocompleteListener())
+        .build();
     HashMap<String, String> commandInfo = new CopypastaDB().getAllCopypastaInformation();
     CommandListUpdateAction commands = jda.updateCommands();
     // Add all copypastas.
@@ -45,24 +48,23 @@ public class Main {
       commands.addCommands(Commands.slash(commandName, commandInfo.get(commandName))
         .setGuildOnly(true));
     }
-    //TODO MAYBE TOO MUCH WHITESPACE HERE? IDK. I LIKE SEPARATING THE COMMANDS BY NEWLINES.
+
     commands.addCommands(Commands.slash("copypasta", "Modify the copypastas available.")
 
-      .addSubcommands(new SubcommandData("add", "Add a copypasta to the list of slash commands")
-        .addOption(OptionType.STRING, "name", "The unique name of the copypasta command to be added. REQUIRED.", true)
-        .addOption(OptionType.STRING, "description", "The description of the copypasta command to be added. REQUIRED.", true)
-        .addOption(OptionType.STRING, "message", "The actual message behind the copypasta command. REQUIRED.", true))
+      .addSubcommands(new SubcommandData("add", "Add a copypasta to the list of slash commands"))
 
       .addSubcommands(new SubcommandData("remove", "Remove a copypasta from the list of slash commands")
         .addOptions(new OptionData(OptionType.STRING, "name", "The name of the copypasta command to be removed. REQUIRED.", true, true)))
-      //TODO NEED TO IMPLEMENT AUTOCOMPLETE LOGIC USING THE COMMAND LIST AND THE AUTOCOMPLETE EVENT
 
         .addSubcommands(new SubcommandData("update", "Change the name, description or message of an existing copypasta")
-          .addOption(OptionType.STRING, "name", "The current name of the copypasta command to be updated. REQUIRED.", true)
-          .addOption(OptionType.STRING, "field", "The field to update. (Name, Description, Message). REQUIRED.", true)
+          .addOption(OptionType.STRING, "name", "The current name of the copypasta command to be updated. REQUIRED.", true, true)
+          .addOption(OptionType.STRING, "field", "The field to update. (Name, Description, Message). REQUIRED.", true, true)
           .addOption(OptionType.STRING, "value", "The new value of the field. REQUIRED.", true))
-      //TODO NEED TO IMPLEMENT AUTOCOMPLETE LOGIC USING THE COMMAND LIST AND THE AUTOCOMPLETE EVENT FOR THE NAMES OF THE COMMANDS FOR THE FIRST OPTION
-      //TODO NEED TO IMPLEMENT AUTOCOMPLETE LOGIC USING THE THREE VALUES (NAME, DESCRIPTION, MESSAGE) FOR THE SECOND OPTION. SHOULD BE MUCH EASIER TO IMPLEMENT THAN THE OTHERS.
+
+        //.addSubcommands(new SubcommandData("list", "List all copypastas available."))
+
+        //TODO CONSIDER IMPLEMENTING A COPYPASTA LIST COMMAND THAT CAN BE USED TO LIST ALL THE COPYPASTAS AVAILABLE, I DON'T SEE THE NEED CONSIDERING DISCORD WILL SHOW US ALL
+	    //TODO REGISTERED COPYPASTAS. SHOULD ASK AROUND AND SEE IF WE EVENTUALLY MAY OR MAY NOT NEED A NEED FOR THIS TO BE A THING.
 
       .setGuildOnly(true));
 
