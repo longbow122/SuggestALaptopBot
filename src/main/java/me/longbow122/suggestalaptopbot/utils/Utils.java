@@ -1,10 +1,12 @@
-package me.longbow122.SuggestALaptopBot.utils;
+package me.longbow122.suggestalaptopbot.utils;
 
 /**
  * A basic Utils class that contains some functions that are to be globally used.
  * @author longbow122
  */
 public final class Utils {
+
+	private Utils() {}
 
 	/**
 	 * Minor utility method to check and validate the name of the command to be added, ensuring that it lies within Discord's limits.

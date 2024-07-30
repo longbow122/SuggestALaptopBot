@@ -1,10 +1,10 @@
-package me.longbow122.SuggestALaptopBot.configuration;
+package me.longbow122.suggestalaptopbot.configuration;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import me.longbow122.SuggestALaptopBot.Main;
+import me.longbow122.suggestalaptopbot.Main;
 
 import java.io.*;
 import java.net.URISyntaxException;

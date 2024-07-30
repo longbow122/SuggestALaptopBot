@@ -1,4 +1,4 @@
-package me.longbow122.SuggestALaptopBot.db;
+package me.longbow122.suggestalaptopbot.db;
 
 import java.sql.*;
 

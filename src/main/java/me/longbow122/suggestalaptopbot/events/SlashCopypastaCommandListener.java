@@ -1,16 +1,13 @@
-package me.longbow122.SuggestALaptopBot.events;
+package me.longbow122.suggestalaptopbot.events;
 
-import me.longbow122.SuggestALaptopBot.db.CopypastaDB;
-import me.longbow122.SuggestALaptopBot.utils.Utils;
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.MessageEmbed;
+import me.longbow122.suggestalaptopbot.db.CopypastaDB;
+import me.longbow122.suggestalaptopbot.utils.Utils;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.text.TextInput;
 import net.dv8tion.jda.api.interactions.components.text.TextInputStyle;
 import net.dv8tion.jda.api.interactions.modals.Modal;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;

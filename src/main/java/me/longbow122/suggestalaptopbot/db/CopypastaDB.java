@@ -1,7 +1,8 @@
-package me.longbow122.SuggestALaptopBot.db;
+package me.longbow122.suggestalaptopbot.db;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -180,7 +181,7 @@ public class CopypastaDB extends Database {
 			return names;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			return Collections.emptyList();
 		}
 	}
 
@@ -211,7 +212,7 @@ public class CopypastaDB extends Database {
 			return found;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			return new HashMap<>();
 		}
 	}
 

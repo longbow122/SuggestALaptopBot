@@ -1,6 +1,6 @@
-package me.longbow122.SuggestALaptopBot.events;
+package me.longbow122.suggestalaptopbot.events;
 
-import me.longbow122.SuggestALaptopBot.db.CopypastaDB;
+import me.longbow122.suggestalaptopbot.db.CopypastaDB;
 import net.dv8tion.jda.api.events.interaction.command.CommandAutoCompleteInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.Command;

@@ -3,9 +3,13 @@ This discord bot was written for [SuggestALaptop](https://discord.gg/r9R7T4Qg5A)
 in recieving a laptop recommendation. This bot also contains several other utility features for the SuggestALaptop discord server.
 This bot was written in Java using [JDA](https://github.com/discord-jda/JDA) to interact with Discord's API.
 
+This bot is also making use of Spring and Spring Boot to expose REST endpoints for some integration with Google Forms.
+
 ## Documentation
 This project has not yet been documented, but once this bot has been developed to the point where it can be considered "complete",
 detailed documentation and video documentation regarding the use and configuration of the bot will be released.
+
+This section will be updated once that has been completed.
 
 ## Maintenance
 This project is solely maintained by [longbow122](https://github.com/longbow122), but has been left as an open source repo
@@ -19,7 +23,7 @@ might be needed.
 
 ## Contributions
 ### Pull Requests
-Contributions through a fork and a pull request are welcome, although, for my (longbow122) sake, I ask that you strenuously
+Contributions through a fork and a pull request are welcome, although, for my (longbow122's) sake, I ask that you strenuously
 comment your code and explain why you've made such a change so that I can learn from your work, and why it is seen as 
 an improvement over what is currently implemented.
 
@@ -43,6 +47,6 @@ When making a pull request, I ask that your branches be named so, where applicab
 If you would like to suggest a feature, or would like to leave a more open-ended suggestion/feedback regarding my code 
 and the implementation of the bot, please open an issue. I will do my best to respond to your issue as soon as I can.
 
-### Comments/Feedback
-General comments and feedback regarding the bot's features and usability are also welcome. You can either create an issue,
+### Comments/Feedback/Suggestions
+General comments, feedback and suggestions regarding the bot's features and usability are also welcome. You can either create an issue,
 or leave a comment by contacting me through [Discord](https://discord.gg/r9R7T4Qg5A).
